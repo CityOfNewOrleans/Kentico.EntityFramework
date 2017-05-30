@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Kentico.EntityFramework.Models
+namespace Kentico.EntityFramework.Models.Analytics
 {
-    public partial class AnalyticsCampaignAsset
+    public partial class CampaignAsset
     {
-        public AnalyticsCampaignAsset()
+        public CampaignAsset()
         {
-            AnalyticsCampaignAssetUrl = new HashSet<AnalyticsCampaignAssetUrl>();
+            AnalyticsCampaignAssetUrl = new HashSet<CampaignAssetUrl>();
         }
 
         public int CampaignAssetId { get; set; }
@@ -18,7 +18,7 @@ namespace Kentico.EntityFramework.Models
         public string CampaignAssetType { get; set; }
         public string CampaignAssetSiteName { get; set; }
 
-        public virtual ICollection<AnalyticsCampaignAssetUrl> AnalyticsCampaignAssetUrl { get; set; }
-        public virtual AnalyticsCampaign CampaignAssetCampaign { get; set; }
+        public virtual ICollection<CampaignAssetUrl> AnalyticsCampaignAssetUrl { get; set; }
+        public virtual Campaign Campaign { get; set; }
     }
 }

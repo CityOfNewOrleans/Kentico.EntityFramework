@@ -2,14 +2,14 @@
 using System;
 using System.Collections.Generic;
 
-namespace Kentico.EntityFramework.Models
+namespace Kentico.EntityFramework.Models.Analytics
 {
-    public partial class AnalyticsCampaign
+    public partial class Campaign
     {
-        public AnalyticsCampaign()
+        public Campaign()
         {
-            AnalyticsCampaignAsset = new HashSet<AnalyticsCampaignAsset>();
-            AnalyticsCampaignConversion = new HashSet<AnalyticsCampaignConversion>();
+            AnalyticsCampaignAsset = new HashSet<CampaignAsset>();
+            AnalyticsCampaignConversion = new HashSet<CampaignConversion>();
             SmFacebookPost = new HashSet<SmFacebookPost>();
             SmLinkedInPost = new HashSet<SmLinkedInPost>();
             SmTwitterPost = new HashSet<SmTwitterPost>();
@@ -29,9 +29,9 @@ namespace Kentico.EntityFramework.Models
         public int? CampaignScheduledTaskId { get; set; }
         public int? CampaignVisitors { get; set; }
 
-        public virtual ICollection<AnalyticsCampaignAsset> AnalyticsCampaignAsset { get; set; }
-        public virtual ICollection<AnalyticsCampaignConversion> AnalyticsCampaignConversion { get; set; }
-        public virtual AnalyticsCampaignObjective AnalyticsCampaignObjective { get; set; }
+        public virtual ICollection<CampaignAsset> AnalyticsCampaignAsset { get; set; }
+        public virtual ICollection<CampaignConversion> AnalyticsCampaignConversion { get; set; }
+        public virtual CampaignObjective AnalyticsCampaignObjective { get; set; }
         public virtual ICollection<SmFacebookPost> SmFacebookPost { get; set; }
         public virtual ICollection<SmLinkedInPost> SmLinkedInPost { get; set; }
         public virtual ICollection<SmTwitterPost> SmTwitterPost { get; set; }

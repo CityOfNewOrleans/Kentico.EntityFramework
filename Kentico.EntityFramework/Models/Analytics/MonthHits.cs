@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Kentico.EntityFramework.Models
+namespace Kentico.EntityFramework.Models.Analytics
 {
-    public partial class AnalyticsMonthHits
+    public partial class MonthHits
     {
         public int HitsId { get; set; }
         public int HitsStatisticsId { get; set; }
@@ -12,6 +12,6 @@ namespace Kentico.EntityFramework.Models
         public int HitsCount { get; set; }
         public double? HitsValue { get; set; }
 
-        public virtual AnalyticsStatistics HitsStatistics { get; set; }
+        public virtual Statistics HitsStatistics { get; set; }
     }
 }

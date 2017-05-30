@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Kentico.EntityFramework.Models
+namespace Kentico.EntityFramework.Models.Analytics
 {
-    public partial class AnalyticsCampaignAssetUrl
+    public partial class CampaignAssetUrl
     {
         public int CampaignAssetUrlId { get; set; }
         public Guid CampaignAssetUrlGuid { get; set; }
@@ -11,6 +11,6 @@ namespace Kentico.EntityFramework.Models
         public string CampaignAssetUrlPageTitle { get; set; }
         public int CampaignAssetUrlCampaignAssetId { get; set; }
 
-        public virtual AnalyticsCampaignAsset CampaignAssetUrlCampaignAsset { get; set; }
+        public virtual CampaignAsset CampaignAssetUrlCampaignAsset { get; set; }
     }
 }

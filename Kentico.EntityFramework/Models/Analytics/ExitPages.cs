@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Kentico.EntityFramework.Models
+namespace Kentico.EntityFramework.Models.Analytics
 {
-    public partial class AnalyticsExitPages
+    public partial class ExitPages
     {
         public string SessionIdentificator { get; set; }
         public int ExitPageNodeId { get; set; }

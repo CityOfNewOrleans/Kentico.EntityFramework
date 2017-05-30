@@ -3,25 +3,26 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Kentico.EntityFramework.Models;
 using Kentico.EntityFramework.Models.Cms;
+using Kentico.EntityFramework.Models.Analytics;
 
 namespace Kentico.EntityFramework
 {
     public abstract class KenticoContext : DbContext
     {
-        public virtual DbSet<AnalyticsCampaign> AnalyticsCampaign { get; set; }
-        public virtual DbSet<AnalyticsCampaignAsset> AnalyticsCampaignAsset { get; set; }
-        public virtual DbSet<AnalyticsCampaignAssetUrl> AnalyticsCampaignAssetUrl { get; set; }
-        public virtual DbSet<AnalyticsCampaignConversion> AnalyticsCampaignConversion { get; set; }
-        public virtual DbSet<AnalyticsCampaignConversionHits> AnalyticsCampaignConversionHits { get; set; }
-        public virtual DbSet<AnalyticsCampaignObjective> AnalyticsCampaignObjective { get; set; }
-        public virtual DbSet<AnalyticsConversion> AnalyticsConversion { get; set; }
-        public virtual DbSet<AnalyticsDayHits> AnalyticsDayHits { get; set; }
-        public virtual DbSet<AnalyticsExitPages> AnalyticsExitPages { get; set; }
-        public virtual DbSet<AnalyticsHourHits> AnalyticsHourHits { get; set; }
-        public virtual DbSet<AnalyticsMonthHits> AnalyticsMonthHits { get; set; }
-        public virtual DbSet<AnalyticsStatistics> AnalyticsStatistics { get; set; }
-        public virtual DbSet<AnalyticsWeekHits> AnalyticsWeekHits { get; set; }
-        public virtual DbSet<AnalyticsYearHits> AnalyticsYearHits { get; set; }
+        public virtual DbSet<Campaign> AnalyticsCampaign { get; set; }
+        public virtual DbSet<CampaignAsset> AnalyticsCampaignAsset { get; set; }
+        public virtual DbSet<CampaignAssetUrl> AnalyticsCampaignAssetUrl { get; set; }
+        public virtual DbSet<CampaignConversion> AnalyticsCampaignConversion { get; set; }
+        public virtual DbSet<CampaignConversionHits> AnalyticsCampaignConversionHits { get; set; }
+        public virtual DbSet<CampaignObjective> AnalyticsCampaignObjective { get; set; }
+        public virtual DbSet<Conversion> AnalyticsConversion { get; set; }
+        public virtual DbSet<DayHits> AnalyticsDayHits { get; set; }
+        public virtual DbSet<ExitPages> AnalyticsExitPages { get; set; }
+        public virtual DbSet<HourHits> AnalyticsHourHits { get; set; }
+        public virtual DbSet<MonthHits> AnalyticsMonthHits { get; set; }
+        public virtual DbSet<Statistics> AnalyticsStatistics { get; set; }
+        public virtual DbSet<WeekHits> AnalyticsWeekHits { get; set; }
+        public virtual DbSet<YearHits> AnalyticsYearHits { get; set; }
         public virtual DbSet<BadWordsWord> BadWordsWord { get; set; }
         public virtual DbSet<BadWordsWordCulture> BadWordsWordCulture { get; set; }
         public virtual DbSet<BlogComment> BlogComment { get; set; }
@@ -349,7 +350,7 @@ namespace Kentico.EntityFramework
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<AnalyticsCampaign>(entity =>
+            modelBuilder.Entity<Campaign>(entity =>
             {
                 entity.HasKey(e => e.CampaignId)
                     .HasName("PK_Analytics_Campaign");
@@ -385,18 +386,18 @@ namespace Kentico.EntityFramework
                     .HasMaxLength(200);
 
                 entity.HasOne(d => d.CampaignScheduledTask)
-                    .WithMany(p => p.AnalyticsCampaign)
+                    .WithMany(p => p.AnalyticsCampaigns)
                     .HasForeignKey(d => d.CampaignScheduledTaskId)
                     .HasConstraintName("FK_Analytics_Campaign_CampaignScheduledTaskID_ScheduledTask");
 
                 entity.HasOne(d => d.CampaignSite)
-                    .WithMany(p => p.AnalyticsCampaign)
+                    .WithMany(p => p.AnalyticsCampaigns)
                     .HasForeignKey(d => d.CampaignSiteId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("FK_Analytics_Campaign_StatisticsSiteID_CMS_Site");
             });
 
-            modelBuilder.Entity<AnalyticsCampaignAsset>(entity =>
+            modelBuilder.Entity<CampaignAsset>(entity =>
             {
                 entity.HasKey(e => e.CampaignAssetId)
                     .HasName("PK_Analytics_CampaignAsset");
@@ -425,14 +426,14 @@ namespace Kentico.EntityFramework
                     .HasMaxLength(200)
                     .HasDefaultValueSql("N''");
 
-                entity.HasOne(d => d.CampaignAssetCampaign)
+                entity.HasOne(d => d.Campaign)
                     .WithMany(p => p.AnalyticsCampaignAsset)
                     .HasForeignKey(d => d.CampaignAssetCampaignId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("FK_Analytics_CampaignAsset_CampaignAssetCampaignID_Analytics_Campaign");
             });
 
-            modelBuilder.Entity<AnalyticsCampaignAssetUrl>(entity =>
+            modelBuilder.Entity<CampaignAssetUrl>(entity =>
             {
                 entity.HasKey(e => e.CampaignAssetUrlId)
                     .HasName("PK_Analytics_CampaignAssetUrl");
@@ -466,7 +467,7 @@ namespace Kentico.EntityFramework
                     .HasConstraintName("FK_Analytics_CampaignAssetUrl_CampaignAssetUrlCampaignAssetID_Analytics_CampaignAsset");
             });
 
-            modelBuilder.Entity<AnalyticsCampaignConversion>(entity =>
+            modelBuilder.Entity<CampaignConversion>(entity =>
             {
                 entity.HasKey(e => e.CampaignConversionId)
                     .HasName("PK_Analytics_CampaignConversion");
@@ -520,7 +521,7 @@ namespace Kentico.EntityFramework
                     .HasConstraintName("FK_Analytics_CampaignConversion_CampaignConversionCampaignID_Analytics_Campaign");
             });
 
-            modelBuilder.Entity<AnalyticsCampaignConversionHits>(entity =>
+            modelBuilder.Entity<CampaignConversionHits>(entity =>
             {
                 entity.HasKey(e => e.CampaignConversionHitsId)
                     .HasName("PK_Analytics_CampaignConversionHits");
@@ -550,7 +551,7 @@ namespace Kentico.EntityFramework
                     .HasConstraintName("FK_Analytics_CampaignConversionHits_CampaignConversionHitsConversionID_Analytics_CampaignConversion");
             });
 
-            modelBuilder.Entity<AnalyticsCampaignObjective>(entity =>
+            modelBuilder.Entity<CampaignObjective>(entity =>
             {
                 entity.HasKey(e => e.CampaignObjectiveId)
                     .HasName("PK_Analytics_CampaignObjective");
@@ -586,12 +587,12 @@ namespace Kentico.EntityFramework
 
                 entity.HasOne(d => d.CampaignObjectiveCampaign)
                     .WithOne(p => p.AnalyticsCampaignObjective)
-                    .HasForeignKey<AnalyticsCampaignObjective>(d => d.CampaignObjectiveCampaignId)
+                    .HasForeignKey<CampaignObjective>(d => d.CampaignObjectiveCampaignId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("FK_Analytics_CampaignObjective_CampaignObjectiveCampaignID_Analytics_Campaign");
             });
 
-            modelBuilder.Entity<AnalyticsConversion>(entity =>
+            modelBuilder.Entity<Conversion>(entity =>
             {
                 entity.HasKey(e => e.ConversionId)
                     .HasName("PK_CMS_Conversion");
@@ -622,7 +623,7 @@ namespace Kentico.EntityFramework
                     .HasConstraintName("FK_Analytics_Conversion_ConversionSiteID_CMS_Site");
             });
 
-            modelBuilder.Entity<AnalyticsDayHits>(entity =>
+            modelBuilder.Entity<DayHits>(entity =>
             {
                 entity.HasKey(e => e.HitsId)
                     .HasName("PK_Analytics_DayHits");
@@ -646,7 +647,7 @@ namespace Kentico.EntityFramework
                     .HasConstraintName("FK_Analytics_DayHits_HitsStatisticsID_Analytics_Statistics");
             });
 
-            modelBuilder.Entity<AnalyticsExitPages>(entity =>
+            modelBuilder.Entity<ExitPages>(entity =>
             {
                 entity.HasKey(e => e.SessionIdentificator)
                     .HasName("PK_Analytics_ExitPages");
@@ -665,7 +666,7 @@ namespace Kentico.EntityFramework
                 entity.Property(e => e.ExitPageSiteId).HasColumnName("ExitPageSiteID");
             });
 
-            modelBuilder.Entity<AnalyticsHourHits>(entity =>
+            modelBuilder.Entity<HourHits>(entity =>
             {
                 entity.HasKey(e => e.HitsId)
                     .HasName("PK_Analytics_HourHits");
@@ -689,7 +690,7 @@ namespace Kentico.EntityFramework
                     .HasConstraintName("FK_Analytics_HourHits_HitsStatisticsID_Analytics_Statistics");
             });
 
-            modelBuilder.Entity<AnalyticsMonthHits>(entity =>
+            modelBuilder.Entity<MonthHits>(entity =>
             {
                 entity.HasKey(e => e.HitsId)
                     .HasName("PK_Analytics_MonthHits");
@@ -713,7 +714,7 @@ namespace Kentico.EntityFramework
                     .HasConstraintName("FK_Analytics_MonthHits_HitsStatisticsID_Analytics_Statistics");
             });
 
-            modelBuilder.Entity<AnalyticsStatistics>(entity =>
+            modelBuilder.Entity<Statistics>(entity =>
             {
                 entity.HasKey(e => e.StatisticsId)
                     .HasName("PK_Analytics_Statistics");
@@ -751,7 +752,7 @@ namespace Kentico.EntityFramework
                     .HasConstraintName("FK_Analytics_Statistics_StatisticsSiteID_CMS_Site");
             });
 
-            modelBuilder.Entity<AnalyticsWeekHits>(entity =>
+            modelBuilder.Entity<WeekHits>(entity =>
             {
                 entity.HasKey(e => e.HitsId)
                     .HasName("PK_Analytics_WeekHits");
@@ -775,7 +776,7 @@ namespace Kentico.EntityFramework
                     .HasConstraintName("FK_Analytics_WeekHits_HitsStatisticsID_Analytics_Statistics");
             });
 
-            modelBuilder.Entity<AnalyticsYearHits>(entity =>
+            modelBuilder.Entity<YearHits>(entity =>
             {
                 entity.HasKey(e => e.HitsId)
                     .HasName("PK_Analytics_YearHits");

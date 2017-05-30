@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Kentico.EntityFramework.Models
+namespace Kentico.EntityFramework.Models.Analytics
 {
-    public partial class AnalyticsCampaignConversion
+    public partial class CampaignConversion
     {
-        public AnalyticsCampaignConversion()
+        public CampaignConversion()
         {
-            AnalyticsCampaignConversionHits = new HashSet<AnalyticsCampaignConversionHits>();
-            AnalyticsCampaignObjective = new HashSet<AnalyticsCampaignObjective>();
+            AnalyticsCampaignConversionHits = new HashSet<CampaignConversionHits>();
+            AnalyticsCampaignObjective = new HashSet<CampaignObjective>();
         }
 
         public int CampaignConversionId { get; set; }
@@ -25,8 +25,8 @@ namespace Kentico.EntityFramework.Models
         public bool CampaignConversionIsFunnelStep { get; set; }
         public string CampaignConversionUrl { get; set; }
 
-        public virtual ICollection<AnalyticsCampaignConversionHits> AnalyticsCampaignConversionHits { get; set; }
-        public virtual ICollection<AnalyticsCampaignObjective> AnalyticsCampaignObjective { get; set; }
-        public virtual AnalyticsCampaign CampaignConversionCampaign { get; set; }
+        public virtual ICollection<CampaignConversionHits> AnalyticsCampaignConversionHits { get; set; }
+        public virtual ICollection<CampaignObjective> AnalyticsCampaignObjective { get; set; }
+        public virtual Campaign CampaignConversionCampaign { get; set; }
     }
 }

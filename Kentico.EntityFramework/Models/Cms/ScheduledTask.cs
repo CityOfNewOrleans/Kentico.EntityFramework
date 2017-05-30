@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Kentico.EntityFramework.Models.Analytics;
+using System;
 using System.Collections.Generic;
 
 namespace Kentico.EntityFramework.Models.Cms
@@ -7,7 +8,7 @@ namespace Kentico.EntityFramework.Models.Cms
     {
         public ScheduledTask()
         {
-            AnalyticsCampaign = new HashSet<AnalyticsCampaign>();
+            AnalyticsCampaigns = new HashSet<Campaign>();
             NewsletterAbtest = new HashSet<NewsletterAbtest>();
             NewsletterNewsletter = new HashSet<NewsletterNewsletter>();
         }
@@ -43,7 +44,7 @@ namespace Kentico.EntityFramework.Models.Cms
         public bool TaskEnabled { get; set; }
         public bool TaskIsRunning { get; set; }
 
-        public virtual ICollection<AnalyticsCampaign> AnalyticsCampaign { get; set; }
+        public virtual ICollection<Campaign> AnalyticsCampaigns { get; set; }
         public virtual ICollection<NewsletterAbtest> NewsletterAbtest { get; set; }
         public virtual ICollection<NewsletterNewsletter> NewsletterNewsletter { get; set; }
         public virtual Resource TaskResource { get; set; }

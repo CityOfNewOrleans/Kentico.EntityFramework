@@ -1,4 +1,4 @@
-﻿using Kentico.EntityFramework.Models.Cms;
+﻿using Kentico.EntityFramework.Models.Analytics;
 using System;
 using System.Collections.Generic;
 
@@ -8,9 +8,9 @@ namespace Kentico.EntityFramework.Models.Cms
     {
         public Site()
         {
-            AnalyticsCampaign = new HashSet<AnalyticsCampaign>();
-            AnalyticsConversion = new HashSet<AnalyticsConversion>();
-            AnalyticsStatistics = new HashSet<AnalyticsStatistics>();
+            AnalyticsCampaigns = new HashSet<Campaign>();
+            AnalyticsConversion = new HashSet<Conversion>();
+            AnalyticsStatistics = new HashSet<Statistics>();
             BoardBoard = new HashSet<BoardBoard>();
             ChatNotification = new HashSet<ChatNotification>();
             ChatOnlineSupport = new HashSet<ChatOnlineSupport>();
@@ -134,9 +134,9 @@ namespace Kentico.EntityFramework.Models.Cms
         public string SitePresentationUrl { get; set; }
         public bool? SiteIsContentOnly { get; set; }
 
-        public virtual ICollection<AnalyticsCampaign> AnalyticsCampaign { get; set; }
-        public virtual ICollection<AnalyticsConversion> AnalyticsConversion { get; set; }
-        public virtual ICollection<AnalyticsStatistics> AnalyticsStatistics { get; set; }
+        public virtual ICollection<Campaign> AnalyticsCampaigns { get; set; }
+        public virtual ICollection<Conversion> AnalyticsConversion { get; set; }
+        public virtual ICollection<Statistics> AnalyticsStatistics { get; set; }
         public virtual ICollection<BoardBoard> BoardBoard { get; set; }
         public virtual ICollection<ChatNotification> ChatNotification { get; set; }
         public virtual ICollection<ChatOnlineSupport> ChatOnlineSupport { get; set; }
