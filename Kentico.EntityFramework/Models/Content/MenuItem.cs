@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Kentico.EntityFramework.Models
+namespace Kentico.EntityFramework.Models.Content
 {
-    public partial class ContentMenuItem
+    public partial class MenuItem
     {
         public int MenuItemId { get; set; }
         public string MenuItemName { get; set; }

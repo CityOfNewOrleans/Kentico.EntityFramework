@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Kentico.EntityFramework.Models
+namespace Kentico.EntityFramework.Models.Content
 {
-    public partial class ContentKbarticle
+    public partial class KnowledgeBaseArticle
     {
         public int KbarticleId { get; set; }
         public string ArticleIdentifier { get; set; }

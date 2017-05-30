@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Kentico.EntityFramework.Models
+namespace Kentico.EntityFramework.Models.Content
 {
-    public partial class ContentPressRelease
+    public partial class PressRelease
     {
         public int PressReleaseId { get; set; }
         public string PressReleaseTitle { get; set; }

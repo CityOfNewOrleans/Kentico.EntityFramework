@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Kentico.EntityFramework.Models;
 using Kentico.EntityFramework.Models.Cms;
 using Kentico.EntityFramework.Models.Analytics;
+using Kentico.EntityFramework.Models.BadWords;
+using Kentico.EntityFramework.Models.Content;
 
 namespace Kentico.EntityFramework
 {
@@ -23,8 +25,8 @@ namespace Kentico.EntityFramework
         public virtual DbSet<Statistics> AnalyticsStatistics { get; set; }
         public virtual DbSet<WeekHits> AnalyticsWeekHits { get; set; }
         public virtual DbSet<YearHits> AnalyticsYearHits { get; set; }
-        public virtual DbSet<BadWordsWord> BadWordsWord { get; set; }
-        public virtual DbSet<BadWordsWordCulture> BadWordsWordCulture { get; set; }
+        public virtual DbSet<Word> BadWordsWord { get; set; }
+        public virtual DbSet<WordCulture> BadWordsWordCulture { get; set; }
         public virtual DbSet<BlogComment> BlogComment { get; set; }
         public virtual DbSet<BlogPostSubscription> BlogPostSubscription { get; set; }
         public virtual DbSet<BoardBoard> BoardBoard { get; set; }
@@ -222,22 +224,22 @@ namespace Kentico.EntityFramework
         public virtual DbSet<CommunityGroupMember> CommunityGroupMember { get; set; }
         public virtual DbSet<CommunityGroupRolePermission> CommunityGroupRolePermission { get; set; }
         public virtual DbSet<CommunityInvitation> CommunityInvitation { get; set; }
-        public virtual DbSet<ContentArticle> ContentArticle { get; set; }
-        public virtual DbSet<ContentBlog> ContentBlog { get; set; }
-        public virtual DbSet<ContentBlogMonth> ContentBlogMonth { get; set; }
-        public virtual DbSet<ContentBlogPost> ContentBlogPost { get; set; }
-        public virtual DbSet<ContentBookingEvent> ContentBookingEvent { get; set; }
-        public virtual DbSet<ContentEvent> ContentEvent { get; set; }
-        public virtual DbSet<ContentFaq> ContentFaq { get; set; }
-        public virtual DbSet<ContentFile> ContentFile { get; set; }
-        public virtual DbSet<ContentJob> ContentJob { get; set; }
-        public virtual DbSet<ContentKbarticle> ContentKbarticle { get; set; }
-        public virtual DbSet<ContentMenuItem> ContentMenuItem { get; set; }
-        public virtual DbSet<ContentNews> ContentNews { get; set; }
-        public virtual DbSet<ContentOffice> ContentOffice { get; set; }
-        public virtual DbSet<ContentPressRelease> ContentPressRelease { get; set; }
-        public virtual DbSet<ContentProduct> ContentProduct { get; set; }
-        public virtual DbSet<ContentSimpleArticle> ContentSimpleArticle { get; set; }
+        public virtual DbSet<Article> ContentArticle { get; set; }
+        public virtual DbSet<Blog> ContentBlog { get; set; }
+        public virtual DbSet<BlogMonth> ContentBlogMonth { get; set; }
+        public virtual DbSet<BlogPost> ContentBlogPost { get; set; }
+        public virtual DbSet<BookingEvent> ContentBookingEvent { get; set; }
+        public virtual DbSet<Event> ContentEvent { get; set; }
+        public virtual DbSet<Faq> ContentFaq { get; set; }
+        public virtual DbSet<File> ContentFile { get; set; }
+        public virtual DbSet<Job> ContentJob { get; set; }
+        public virtual DbSet<KnowledgeBaseArticle> KnowledgeBaseArticles { get; set; }
+        public virtual DbSet<MenuItem> ContentMenuItem { get; set; }
+        public virtual DbSet<News> ContentNews { get; set; }
+        public virtual DbSet<Office> ContentOffice { get; set; }
+        public virtual DbSet<PressRelease> ContentPressRelease { get; set; }
+        public virtual DbSet<Product> ContentProduct { get; set; }
+        public virtual DbSet<SimpleArticle> ContentSimpleArticle { get; set; }
         public virtual DbSet<CustomtableSampleTable> CustomtableSampleTable { get; set; }
         public virtual DbSet<EventsAttendee> EventsAttendee { get; set; }
         public virtual DbSet<ExportHistory> ExportHistory { get; set; }
@@ -800,7 +802,7 @@ namespace Kentico.EntityFramework
                     .HasConstraintName("FK_Analytics_YearHits_HitsStatisticsID_Analytics_Statistics");
             });
 
-            modelBuilder.Entity<BadWordsWord>(entity =>
+            modelBuilder.Entity<Word>(entity =>
             {
                 entity.HasKey(e => e.WordId)
                     .HasName("PK_BadWords_Word");
@@ -829,7 +831,7 @@ namespace Kentico.EntityFramework
                 entity.Property(e => e.WordReplacement).HasMaxLength(200);
             });
 
-            modelBuilder.Entity<BadWordsWordCulture>(entity =>
+            modelBuilder.Entity<WordCulture>(entity =>
             {
                 entity.HasKey(e => new { e.WordId, e.CultureId })
                     .HasName("PK_BadWords_WordCulture");
@@ -10371,7 +10373,7 @@ namespace Kentico.EntityFramework
                     .HasConstraintName("FK_Community_GroupInvitation_InvitedUserID_CMS_User");
             });
 
-            modelBuilder.Entity<ContentArticle>(entity =>
+            modelBuilder.Entity<Article>(entity =>
             {
                 entity.HasKey(e => e.ArticleId)
                     .HasName("PK_CONTENT_Article");
@@ -10386,7 +10388,7 @@ namespace Kentico.EntityFramework
                     .HasDefaultValueSql("N''");
             });
 
-            modelBuilder.Entity<ContentBlog>(entity =>
+            modelBuilder.Entity<Blog>(entity =>
             {
                 entity.HasKey(e => e.BlogId)
                     .HasName("PK_CONTENT_Blog");
@@ -10436,7 +10438,7 @@ namespace Kentico.EntityFramework
                     .HasDefaultValueSql("1");
             });
 
-            modelBuilder.Entity<ContentBlogMonth>(entity =>
+            modelBuilder.Entity<BlogMonth>(entity =>
             {
                 entity.HasKey(e => e.BlogMonthId)
                     .HasName("PK_CONTENT_BlogMonth");
@@ -10453,7 +10455,7 @@ namespace Kentico.EntityFramework
                 entity.Property(e => e.BlogMonthStartingDate).HasDefaultValueSql("'1/1/0001 12:00:00 AM'");
             });
 
-            modelBuilder.Entity<ContentBlogPost>(entity =>
+            modelBuilder.Entity<BlogPost>(entity =>
             {
                 entity.HasKey(e => e.BlogPostId)
                     .HasName("PK_CONTENT_BlogPost");
@@ -10480,7 +10482,7 @@ namespace Kentico.EntityFramework
                 entity.Property(e => e.LinkedInAutoPost).HasMaxLength(200);
             });
 
-            modelBuilder.Entity<ContentBookingEvent>(entity =>
+            modelBuilder.Entity<BookingEvent>(entity =>
             {
                 entity.HasKey(e => e.BookingEventId)
                     .HasName("PK_CONTENT_BookingEvent");
@@ -10501,7 +10503,7 @@ namespace Kentico.EntityFramework
                     .HasDefaultValueSql("N''");
             });
 
-            modelBuilder.Entity<ContentEvent>(entity =>
+            modelBuilder.Entity<Event>(entity =>
             {
                 entity.HasKey(e => e.EventId)
                     .HasName("PK_CONTENT_Event");
@@ -10516,7 +10518,7 @@ namespace Kentico.EntityFramework
                     .HasDefaultValueSql("N''");
             });
 
-            modelBuilder.Entity<ContentFaq>(entity =>
+            modelBuilder.Entity<Faq>(entity =>
             {
                 entity.HasKey(e => e.Faqid)
                     .HasName("PK_CONTENT_FAQ");
@@ -10537,7 +10539,7 @@ namespace Kentico.EntityFramework
                     .HasDefaultValueSql("N''");
             });
 
-            modelBuilder.Entity<ContentFile>(entity =>
+            modelBuilder.Entity<File>(entity =>
             {
                 entity.HasKey(e => e.FileId)
                     .HasName("PK__CONTENT___6F0F989F1B863013");
@@ -10554,7 +10556,7 @@ namespace Kentico.EntityFramework
                     .HasDefaultValueSql("''");
             });
 
-            modelBuilder.Entity<ContentJob>(entity =>
+            modelBuilder.Entity<Job>(entity =>
             {
                 entity.HasKey(e => e.JobId)
                     .HasName("PK_CONTENT_Job");
@@ -10569,7 +10571,7 @@ namespace Kentico.EntityFramework
                     .HasDefaultValueSql("N''");
             });
 
-            modelBuilder.Entity<ContentKbarticle>(entity =>
+            modelBuilder.Entity<KnowledgeBaseArticle>(entity =>
             {
                 entity.HasKey(e => e.KbarticleId)
                     .HasName("PK_CONTENT_KBArticle");
@@ -10598,7 +10600,7 @@ namespace Kentico.EntityFramework
                     .HasDefaultValueSql("N''");
             });
 
-            modelBuilder.Entity<ContentMenuItem>(entity =>
+            modelBuilder.Entity<MenuItem>(entity =>
             {
                 entity.HasKey(e => e.MenuItemId)
                     .HasName("PK_CONTENT_MenuItem");
@@ -10615,7 +10617,7 @@ namespace Kentico.EntityFramework
                     .HasDefaultValueSql("N''");
             });
 
-            modelBuilder.Entity<ContentNews>(entity =>
+            modelBuilder.Entity<News>(entity =>
             {
                 entity.HasKey(e => e.NewsId)
                     .HasName("PK_CONTENT_News");
@@ -10636,7 +10638,7 @@ namespace Kentico.EntityFramework
                     .HasDefaultValueSql("N''");
             });
 
-            modelBuilder.Entity<ContentOffice>(entity =>
+            modelBuilder.Entity<Office>(entity =>
             {
                 entity.HasKey(e => e.OfficeId)
                     .HasName("PK_CONTENT_Office");
@@ -10677,7 +10679,7 @@ namespace Kentico.EntityFramework
                     .HasMaxLength(50);
             });
 
-            modelBuilder.Entity<ContentPressRelease>(entity =>
+            modelBuilder.Entity<PressRelease>(entity =>
             {
                 entity.HasKey(e => e.PressReleaseId)
                     .HasName("PK_CONTENT_PressRelease");
@@ -10702,7 +10704,7 @@ namespace Kentico.EntityFramework
                     .HasDefaultValueSql("N''");
             });
 
-            modelBuilder.Entity<ContentProduct>(entity =>
+            modelBuilder.Entity<Product>(entity =>
             {
                 entity.HasKey(e => e.ProductId)
                     .HasName("PK_CONTENT_Product");
@@ -10714,7 +10716,7 @@ namespace Kentico.EntityFramework
                 entity.Property(e => e.ProductName).HasMaxLength(440);
             });
 
-            modelBuilder.Entity<ContentSimpleArticle>(entity =>
+            modelBuilder.Entity<SimpleArticle>(entity =>
             {
                 entity.HasKey(e => e.ArticleId)
                     .HasName("PK_CONTENT_SimpleArticle");

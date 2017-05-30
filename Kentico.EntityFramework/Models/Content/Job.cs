@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Kentico.EntityFramework.Models
+namespace Kentico.EntityFramework.Models.Content
 {
-    public partial class ContentJob
+    public partial class Job
     {
         public int JobId { get; set; }
         public string JobName { get; set; }

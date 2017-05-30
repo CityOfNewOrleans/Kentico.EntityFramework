@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Kentico.EntityFramework.Models
+namespace Kentico.EntityFramework.Models.BadWords
 {
-    public partial class BadWordsWord
+    public partial class Word
     {
-        public BadWordsWord()
+        public Word()
         {
-            BadWordsWordCulture = new HashSet<BadWordsWordCulture>();
+            BadWordsWordCulture = new HashSet<WordCulture>();
         }
 
         public int WordId { get; set; }
@@ -20,6 +20,6 @@ namespace Kentico.EntityFramework.Models
         public bool WordIsRegularExpression { get; set; }
         public bool? WordMatchWholeWord { get; set; }
 
-        public virtual ICollection<BadWordsWordCulture> BadWordsWordCulture { get; set; }
+        public virtual ICollection<WordCulture> BadWordsWordCulture { get; set; }
     }
 }

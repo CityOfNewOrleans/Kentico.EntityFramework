@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Kentico.EntityFramework.Models
+namespace Kentico.EntityFramework.Models.Content
 {
-    public partial class ContentEvent
+    public partial class Event
     {
         public int EventId { get; set; }
         public string EventName { get; set; }

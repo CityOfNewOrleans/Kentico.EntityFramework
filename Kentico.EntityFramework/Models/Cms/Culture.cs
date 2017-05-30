@@ -7,7 +7,7 @@ namespace Kentico.EntityFramework.Models.Cms
     {
         public Culture()
         {
-            BadWordsWordCulture = new HashSet<BadWordsWordCulture>();
+            BadWordsWordCulture = new HashSet<WordCulture>();
             CmsPageTemplateScope = new HashSet<PageTemplateScope>();
             CmsResourceTranslation = new HashSet<ResourceTranslation>();
             CmsSearchIndexCulture = new HashSet<SearchIndexCulture>();
@@ -25,7 +25,7 @@ namespace Kentico.EntityFramework.Models.Cms
         public string CultureAlias { get; set; }
         public bool? CultureIsUiculture { get; set; }
 
-        public virtual ICollection<BadWordsWordCulture> BadWordsWordCulture { get; set; }
+        public virtual ICollection<WordCulture> BadWordsWordCulture { get; set; }
         public virtual ICollection<PageTemplateScope> CmsPageTemplateScope { get; set; }
         public virtual ICollection<ResourceTranslation> CmsResourceTranslation { get; set; }
         public virtual ICollection<SearchIndexCulture> CmsSearchIndexCulture { get; set; }

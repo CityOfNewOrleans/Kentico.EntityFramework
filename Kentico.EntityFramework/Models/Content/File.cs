@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Kentico.EntityFramework.Models
+namespace Kentico.EntityFramework.Models.Content
 {
-    public partial class ContentFile
+    public partial class File
     {
         public int FileId { get; set; }
         public string FileDescription { get; set; }
