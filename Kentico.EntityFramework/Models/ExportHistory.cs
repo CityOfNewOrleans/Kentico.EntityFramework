@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Kentico.EntityFramework.Models
+namespace Kentico.EntityFramework.Models.Cms
 {
-    public partial class ExportHistory
+    public class ExportHistory
     {
         public int ExportId { get; set; }
         public DateTime ExportDateTime { get; set; }
@@ -12,7 +12,7 @@ namespace Kentico.EntityFramework.Models
         public int? ExportUserId { get; set; }
         public string ExportSettings { get; set; }
 
-        public virtual CmsSite ExportSite { get; set; }
-        public virtual CmsUser ExportUser { get; set; }
+        public virtual Site ExportSite { get; set; }
+        public virtual User ExportUser { get; set; }
     }
 }

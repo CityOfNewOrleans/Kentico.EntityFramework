@@ -10,4 +10,10 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="1.1.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Configuration\Analytics\" />
+    <Folder Include="Configuration\BadWords\" />
+    <Folder Include="Configuration\Blogs\" />
+  </ItemGroup>
+
 </Project>

@@ -14,6 +14,6 @@ namespace Kentico.EntityFramework.Models
         public Guid AttendeeGuid { get; set; }
         public DateTime AttendeeLastModified { get; set; }
 
-        public virtual CmsTree AttendeeEventNode { get; set; }
+        public virtual Tree AttendeeEventNode { get; set; }
     }
 }

@@ -14,6 +14,6 @@ namespace Kentico.EntityFramework.Models
         public string TaskObjectType { get; set; }
         public int? TaskObjectId { get; set; }
 
-        public virtual CmsSite TaskSite { get; set; }
+        public virtual Site TaskSite { get; set; }
     }
 }
