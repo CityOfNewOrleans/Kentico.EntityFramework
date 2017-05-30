@@ -33,7 +33,7 @@ namespace Kentico.EntityFramework.Models.Cms
             CmsObjectSettings = new HashSet<ObjectSettings>();
             CmsObjectVersionHistoryVersionDeletedByUser = new HashSet<ObjectVersionHistory>();
             CmsObjectVersionHistoryVersionModifiedByUser = new HashSet<ObjectVersionHistory>();
-            CmsOpenIduser = new HashSet<OpenIduser>();
+            CmsOpenIduser = new HashSet<OpenIdUser>();
             CmsPersonalization = new HashSet<Personalization>();
             CmsScheduledTask = new HashSet<ScheduledTask>();
             CmsSession = new HashSet<Session>();
@@ -141,7 +141,7 @@ namespace Kentico.EntityFramework.Models.Cms
         public virtual ICollection<ObjectSettings> CmsObjectSettings { get; set; }
         public virtual ICollection<ObjectVersionHistory> CmsObjectVersionHistoryVersionDeletedByUser { get; set; }
         public virtual ICollection<ObjectVersionHistory> CmsObjectVersionHistoryVersionModifiedByUser { get; set; }
-        public virtual ICollection<OpenIduser> CmsOpenIduser { get; set; }
+        public virtual ICollection<OpenIdUser> CmsOpenIduser { get; set; }
         public virtual ICollection<Personalization> CmsPersonalization { get; set; }
         public virtual ICollection<ScheduledTask> CmsScheduledTask { get; set; }
         public virtual ICollection<Session> CmsSession { get; set; }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Kentico.EntityFramework.Models.Cms;
+using System;
 using System.Collections.Generic;
 
 namespace Kentico.EntityFramework.Models
@@ -7,7 +8,7 @@ namespace Kentico.EntityFramework.Models
     {
         public ComSku()
         {
-            CmsTree = new HashSet<Tree>();
+            Tree = new HashSet<Tree>();
             ComBundleBundle = new HashSet<ComBundle>();
             ComBundleSku = new HashSet<ComBundle>();
             ComMultiBuyDiscount = new HashSet<ComMultiBuyDiscount>();
@@ -75,7 +76,7 @@ namespace Kentico.EntityFramework.Models
         public int? SkureorderAt { get; set; }
         public string SkutrackInventory { get; set; }
 
-        public virtual ICollection<Tree> CmsTree { get; set; }
+        public virtual ICollection<Tree> Tree { get; set; }
         public virtual ICollection<ComBundle> ComBundleBundle { get; set; }
         public virtual ICollection<ComBundle> ComBundleSku { get; set; }
         public virtual ICollection<ComMultiBuyDiscount> ComMultiBuyDiscount { get; set; }

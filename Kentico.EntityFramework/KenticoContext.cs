@@ -95,7 +95,7 @@ namespace Kentico.EntityFramework
         public virtual DbSet<ObjectSettings> CmsObjectSettings { get; set; }
         public virtual DbSet<ObjectVersionHistory> CmsObjectVersionHistory { get; set; }
         public virtual DbSet<ObjectWorkflowTrigger> CmsObjectWorkflowTrigger { get; set; }
-        public virtual DbSet<OpenIduser> CmsOpenIduser { get; set; }
+        public virtual DbSet<OpenIdUser> CmsOpenIduser { get; set; }
         public virtual DbSet<PageTemplate> CmsPageTemplate { get; set; }
         public virtual DbSet<PageTemplateCategory> CmsPageTemplateCategory { get; set; }
         public virtual DbSet<PageTemplateScope> CmsPageTemplateScope { get; set; }
@@ -2734,11 +2734,12 @@ namespace Kentico.EntityFramework
                     .HasForeignKey(d => d.ClassDefaultPageTemplateId)
                     .HasConstraintName("FK_CMS_Class_ClassDefaultPageTemplateID_CMS_PageTemplate");
 
-                entity.HasOne(d => d.Class)
-                    .WithOne(p => p.InverseClass)
-                    .HasForeignKey<Class>(d => d.ClassId)
-                    .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("FK_CMS_Class_CMS_Class");
+                #warning Uncomment this wher Class.Class naming issue is resolved.
+                //entity.HasOne(d => d.Class)
+                //    .WithOne(p => p.InverseClass)
+                //    .HasForeignKey<Class>(d => d.ClassId)
+                //    .OnDelete(DeleteBehavior.Restrict)
+                //    .HasConstraintName("FK_CMS_Class_CMS_Class");
 
                 entity.HasOne(d => d.ClassPageTemplateCategory)
                     .WithMany(p => p.CmsClass)
@@ -4308,7 +4309,7 @@ namespace Kentico.EntityFramework
                     .HasConstraintName("FK_CMS_ObjectWorkflowTrigger_TriggerWorkflowID");
             });
 
-            modelBuilder.Entity<OpenIduser>(entity =>
+            modelBuilder.Entity<OpenIdUser>(entity =>
             {
                 entity.HasKey(e => e.OpenIduserId)
                     .HasName("PK_CMS_OpenIDUser");
@@ -4678,11 +4679,12 @@ namespace Kentico.EntityFramework
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("FK_CMS_Personalization_PersonalizationDocumentID_CMS_Document");
 
-                entity.HasOne(d => d.Personalization)
-                    .WithOne(p => p.InversePersonalization)
-                    .HasForeignKey<Personalization>(d => d.PersonalizationId)
-                    .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("FK_CMS_Personalization_CMS_Personalization");
+                #warning Uncomment this code when Personalization.Personalization naming issue has been resolved.
+                //entity.HasOne(d => d.Personalization)
+                //    .WithOne(p => p.InversePersonalization)
+                //    .HasForeignKey<Personalization>(d => d.PersonalizationId)
+                //    .OnDelete(DeleteBehavior.Restrict)
+                //    .HasConstraintName("FK_CMS_Personalization_CMS_Personalization");
 
                 entity.HasOne(d => d.PersonalizationSite)
                     .WithMany(p => p.CmsPersonalization)
@@ -5038,7 +5040,7 @@ namespace Kentico.EntityFramework
                     .HasColumnName("SiteID");
 
                 entity.HasOne(d => d.RoleGroup)
-                    .WithMany(p => p.CmsRole)
+                    .WithMany(p => p.Role)
                     .HasForeignKey(d => d.RoleGroupId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("FK_CMS_Role_RoleGroupID_Community_Group");
@@ -6250,7 +6252,7 @@ namespace Kentico.EntityFramework
                     .HasConstraintName("FK_CMS_Tree_NodeClassID_CMS_Class");
 
                 entity.HasOne(d => d.NodeGroup)
-                    .WithMany(p => p.CmsTree)
+                    .WithMany(p => p.Tree)
                     .HasForeignKey(d => d.NodeGroupId)
                     .HasConstraintName("FK_CMS_Tree_NodeGroupID_Community_Group");
 
@@ -6286,7 +6288,7 @@ namespace Kentico.EntityFramework
                     .HasConstraintName("FK_CMS_Tree_NodeSiteID_CMS_Site");
 
                 entity.HasOne(d => d.NodeSku)
-                    .WithMany(p => p.CmsTree)
+                    .WithMany(p => p.Tree)
                     .HasForeignKey(d => d.NodeSkuid)
                     .HasConstraintName("FK_CMS_Tree_NodeSKUID_COM_SKU");
 

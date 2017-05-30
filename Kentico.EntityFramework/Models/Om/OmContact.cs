@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Kentico.EntityFramework.Models.Cms;
+using System;
 using System.Collections.Generic;
 
 namespace Kentico.EntityFramework.Models
@@ -55,7 +56,7 @@ namespace Kentico.EntityFramework.Models
         public virtual ICollection<OmVisitorToContact> OmVisitorToContact { get; set; }
         public virtual Country ContactCountry { get; set; }
         public virtual User ContactOwnerUser { get; set; }
-        public virtual CmsState ContactState { get; set; }
+        public virtual State ContactState { get; set; }
         public virtual OmContactStatus ContactStatus { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Kentico.EntityFramework.Models.Cms;
+using System;
 using System.Collections.Generic;
 
 namespace Kentico.EntityFramework.Models

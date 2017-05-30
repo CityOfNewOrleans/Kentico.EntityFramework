@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Kentico.EntityFramework.Models.Cms;
+using System;
 using System.Collections.Generic;
 
 namespace Kentico.EntityFramework.Models
@@ -8,8 +9,8 @@ namespace Kentico.EntityFramework.Models
         public CommunityGroup()
         {
             BoardBoard = new HashSet<BoardBoard>();
-            CmsRole = new HashSet<Role>();
-            CmsTree = new HashSet<Tree>();
+            Role = new HashSet<Role>();
+            Tree = new HashSet<Tree>();
             CommunityGroupMember = new HashSet<CommunityGroupMember>();
             CommunityGroupRolePermission = new HashSet<CommunityGroupRolePermission>();
             CommunityInvitation = new HashSet<CommunityInvitation>();
@@ -40,8 +41,8 @@ namespace Kentico.EntityFramework.Models
         public bool? GroupLogActivity { get; set; }
 
         public virtual ICollection<BoardBoard> BoardBoard { get; set; }
-        public virtual ICollection<Role> CmsRole { get; set; }
-        public virtual ICollection<Tree> CmsTree { get; set; }
+        public virtual ICollection<Role> Role { get; set; }
+        public virtual ICollection<Tree> Tree { get; set; }
         public virtual ICollection<CommunityGroupMember> CommunityGroupMember { get; set; }
         public virtual ICollection<CommunityGroupRolePermission> CommunityGroupRolePermission { get; set; }
         public virtual ICollection<CommunityInvitation> CommunityInvitation { get; set; }
