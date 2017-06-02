@@ -6,18 +6,19 @@ using Kentico.EntityFramework.Models.Cms;
 using Kentico.EntityFramework.Models.Analytics;
 using Kentico.EntityFramework.Models.BadWords;
 using Kentico.EntityFramework.Models.Content;
+using Kentico.EntityFramework.Configuration.Analytics;
 
 namespace Kentico.EntityFramework
 {
     public abstract class KenticoContext : DbContext
     {
-        public virtual DbSet<Campaign> AnalyticsCampaign { get; set; }
-        public virtual DbSet<CampaignAsset> AnalyticsCampaignAsset { get; set; }
-        public virtual DbSet<CampaignAssetUrl> AnalyticsCampaignAssetUrl { get; set; }
-        public virtual DbSet<CampaignConversion> AnalyticsCampaignConversion { get; set; }
+        public virtual DbSet<Campaign> AnalyticsCampaigns { get; set; }
+        public virtual DbSet<CampaignAsset> AnalyticsCampaignAssets { get; set; }
+        public virtual DbSet<CampaignAssetUrl> AnalyticsCampaignAssetUrls { get; set; }
+        public virtual DbSet<CampaignConversion> AnalyticsCampaignConversions { get; set; }
         public virtual DbSet<CampaignConversionHits> AnalyticsCampaignConversionHits { get; set; }
-        public virtual DbSet<CampaignObjective> AnalyticsCampaignObjective { get; set; }
-        public virtual DbSet<Conversion> AnalyticsConversion { get; set; }
+        public virtual DbSet<CampaignObjective> AnalyticsCampaignObjectives { get; set; }
+        public virtual DbSet<Conversion> AnalyticsConversions { get; set; }
         public virtual DbSet<DayHits> AnalyticsDayHits { get; set; }
         public virtual DbSet<ExitPages> AnalyticsExitPages { get; set; }
         public virtual DbSet<HourHits> AnalyticsHourHits { get; set; }
@@ -352,88 +353,11 @@ namespace Kentico.EntityFramework
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Campaign>(entity =>
-            {
-                entity.HasKey(e => e.CampaignId)
-                    .HasName("PK_Analytics_Campaign");
+            CampaignConfiguration.Configure(modelBuilder);
 
-                entity.ToTable("Analytics_Campaign");
+            CampaignAssetConfiguration.Configure(modelBuilder);
 
-                entity.HasIndex(e => e.CampaignScheduledTaskId)
-                    .HasName("IX_Analytics_Campaign_CampaignScheduledTaskID");
-
-                entity.HasIndex(e => e.CampaignSiteId)
-                    .HasName("IX_Analytics_Campaign_CampaignSiteID");
-
-                entity.Property(e => e.CampaignId).HasColumnName("CampaignID");
-
-                entity.Property(e => e.CampaignDisplayName)
-                    .IsRequired()
-                    .HasMaxLength(100)
-                    .HasDefaultValueSql("''");
-
-                entity.Property(e => e.CampaignGuid).HasColumnName("CampaignGUID");
-
-                entity.Property(e => e.CampaignName)
-                    .IsRequired()
-                    .HasMaxLength(200)
-                    .HasDefaultValueSql("''");
-
-                entity.Property(e => e.CampaignScheduledTaskId).HasColumnName("CampaignScheduledTaskID");
-
-                entity.Property(e => e.CampaignSiteId).HasColumnName("CampaignSiteID");
-
-                entity.Property(e => e.CampaignUtmcode)
-                    .HasColumnName("CampaignUTMCode")
-                    .HasMaxLength(200);
-
-                entity.HasOne(d => d.CampaignScheduledTask)
-                    .WithMany(p => p.AnalyticsCampaigns)
-                    .HasForeignKey(d => d.CampaignScheduledTaskId)
-                    .HasConstraintName("FK_Analytics_Campaign_CampaignScheduledTaskID_ScheduledTask");
-
-                entity.HasOne(d => d.CampaignSite)
-                    .WithMany(p => p.AnalyticsCampaigns)
-                    .HasForeignKey(d => d.CampaignSiteId)
-                    .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("FK_Analytics_Campaign_StatisticsSiteID_CMS_Site");
-            });
-
-            modelBuilder.Entity<CampaignAsset>(entity =>
-            {
-                entity.HasKey(e => e.CampaignAssetId)
-                    .HasName("PK_Analytics_CampaignAsset");
-
-                entity.ToTable("Analytics_CampaignAsset");
-
-                entity.HasIndex(e => e.CampaignAssetCampaignId)
-                    .HasName("IX_Analytics_CampaignAsset_CampaignAssetCampaignID");
-
-                entity.Property(e => e.CampaignAssetId).HasColumnName("CampaignAssetID");
-
-                entity.Property(e => e.CampaignAssetAssetGuid).HasDefaultValueSql("'00000000-0000-0000-0000-000000000000'");
-
-                entity.Property(e => e.CampaignAssetCampaignId)
-                    .HasColumnName("CampaignAssetCampaignID")
-                    .HasDefaultValueSql("0");
-
-                entity.Property(e => e.CampaignAssetGuid).HasDefaultValueSql("'00000000-0000-0000-0000-000000000000'");
-
-                entity.Property(e => e.CampaignAssetLastModified).HasDefaultValueSql("'1/1/0001 12:00:00 AM'");
-
-                entity.Property(e => e.CampaignAssetSiteName).HasMaxLength(200);
-
-                entity.Property(e => e.CampaignAssetType)
-                    .IsRequired()
-                    .HasMaxLength(200)
-                    .HasDefaultValueSql("N''");
-
-                entity.HasOne(d => d.Campaign)
-                    .WithMany(p => p.AnalyticsCampaignAsset)
-                    .HasForeignKey(d => d.CampaignAssetCampaignId)
-                    .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("FK_Analytics_CampaignAsset_CampaignAssetCampaignID_Analytics_Campaign");
-            });
+            CampaignAssetUrlConfiguration.Configure(modelBuilder);
 
             modelBuilder.Entity<CampaignAssetUrl>(entity =>
             {
